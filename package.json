@@ -2,11 +2,11 @@
   "name": "chatapplication",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "./backend/index.js",
   "scripts": {
     "start": "nodemon -r dotenv/config --experimental-json-modules ./backend/index.js"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
