@@ -11,7 +11,7 @@ app.use(cors({
 
 app.use(express.json({
     limit:"16kb"
-}))
+})) //to parse the incoming requests with JSON payloads(from req.body)
 
 app.use(express.urlencoded({
     extended:true,
@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
     res.send("hello world")
 })
 
+// import the routers
 
 import authRouter from "./routes/auth.routes.js"
 
