@@ -17,7 +17,7 @@ const signup = asyncHandler(async (req, res) => {
     const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${userName}`
 
     const salt = await bcrypt.genSalt(10) //hash the passwords
-    const hashPassword = await bcrypt.hashPassword(password, salt)
+    const hashPassword = await bcrypt.hash(password, salt)
 
     const newUser = await User.create({
         fullName,
