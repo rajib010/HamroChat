@@ -28,7 +28,7 @@ const signup = asyncHandler(async (req, res) => {
         profilePic: gender === "male" ? boyProfilePic : girlProfilePic
     })
     if (newUser) {
-        generateTokenAndSetCookie(newUser?._id, res);    
+        generateTokenAndSetCookie(newUser?._id, res);
         return res.status(201).json(new ApiResponse(201, {
             _id: newUser._id,
             fullName: newUser.fullName,
@@ -40,6 +40,24 @@ const signup = asyncHandler(async (req, res) => {
     }
 })
 
+const login = asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email })
+    if (!user) {
+        throw new ApiError(404, "user doesnot exits")
+    }
+    const isPasswordcorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordcorrect) {
+        throw new ApiError(400, "Invalid password")
+    }
+    generateTokenAndSetCookie(user?._id, res);
+    return res.status(200).json(new ApiResponse(200, {
+        _id: user._id,
+        fullName: user.fullName,
+        userName: user.userName,
+        profilePic: user.profilePic
+    }, "User login successfull"))
+})
 
 
 export { signup }
