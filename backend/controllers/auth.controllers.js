@@ -46,7 +46,7 @@ const login = asyncHandler(async (req, res) => {
     if (!user) {
         throw new ApiError(404, "user doesnot exits")
     }
-    const isPasswordcorrect = await bcrypt.compare(password, user.password);
+    const isPasswordcorrect = await bcrypt.compare(password, user?.password || "");
     if (!isPasswordcorrect) {
         throw new ApiError(400, "Invalid password")
     }
@@ -59,5 +59,10 @@ const login = asyncHandler(async (req, res) => {
     }, "User login successfull"))
 })
 
+const logout = asyncHandler(async (req, res) => {
+    res.cookie("jwtToken", "", { maxAge: 0 })
+    return res.status(200).json(new ApiResponse(200, {}, "Logged out successfully"))
+})
 
-export { signup, login }
+
+export { signup, login, logout }
