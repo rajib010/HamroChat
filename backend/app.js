@@ -6,16 +6,16 @@ const app = express();
 
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
-    credentials:true
+    credentials: true
 }));
 
 app.use(express.json({
-    limit:"16kb"
+    limit: "16kb"
 })) //to parse the incoming requests with JSON payloads(from req.body)
 
 app.use(express.urlencoded({
-    extended:true,
-    limit:"16kb"
+    extended: true,
+    limit: "16kb"
 }))
 
 app.use(express.static("public"))
@@ -30,8 +30,10 @@ app.get("/", (req, res) => {
 // import the routers
 
 import authRouter from "./routes/auth.routes.js"
+import messageRouter from "./routes/message.routes.js"
 
 app.use("/api/auth", authRouter)
+app.use("/api/message", messageRouter)
 
 
 export default app;
