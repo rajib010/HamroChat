@@ -50,7 +50,7 @@ const login = asyncHandler(async (req, res) => {
     if (!isPasswordcorrect) {
         throw new ApiError(400, "Invalid password")
     }
-    generateTokenAndSetCookie(user?._id, res);
+    generateTokenAndSetCookie(user._id, res);
     return res.status(200).json(new ApiResponse(200, {
         _id: user._id,
         fullName: user.fullName,
@@ -60,4 +60,4 @@ const login = asyncHandler(async (req, res) => {
 })
 
 
-export { signup }
+export { signup, login }
