@@ -31,9 +31,11 @@ app.get("/", (req, res) => {
 
 import authRouter from "./routes/auth.routes.js"
 import messageRouter from "./routes/message.routes.js"
+import userRouter from "./routes/user.routes.js"
 
 app.use("/api/auth", authRouter)
 app.use("/api/message", messageRouter)
+app.use("/api/users", userRouter)
 
 
 export default app;
