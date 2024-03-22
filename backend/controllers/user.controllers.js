@@ -1,5 +1,5 @@
 import { asyncHandler, ApiError, ApiResponse } from "../utility/index.js";
-import User from "../model/user.model.js"
+import {User} from "../model/user.model.js"
 
 const getUsersForSideBar = asyncHandler(async (req, res) => {
     const loggedInUserId = req.user?._id
