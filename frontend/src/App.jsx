@@ -1,10 +1,10 @@
 import React from 'react'
-import Login from './pages/login/Login.jsx'
+import Signup from "../src/pages/signup/Signup.jsx"
 
 const App = () => {
   return (
     <div className='p-4 h-screen flex items-center justify-center'>
-      <Login />
+      <Signup />
     </div>
   )
 }
