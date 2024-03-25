@@ -1,0 +1,50 @@
+import { set } from "mongoose"
+import { useState } from "react"
+import toast from "react-hot-toast"
+
+const useSignup = () => {
+  const [loading, setLoading] = useState(false)
+
+  const signup = async ({ fullName, userName, email, password, confirmPassword, gender }) => {
+    const success = handleInputErrors({ fullName, email, userName, password, confirmPassword, gender })
+    if (!success) return;
+    setLoading(true);
+
+    try {
+      const res = await ("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fullName, userName, email, password, confirmPassword, gender })
+      });
+
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      toast.error(error.message)
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return {loading, signup}
+}
+
+export default useSignup
+
+
+function handleInputErrors({ fullName, userName, email, password, confirmPassword, gender }) {
+  if (!fullName || !userName || !email || !password || !confirmPassword || !gender) {
+    toast.error("Please fill in all the fields")
+    return false
+  }
+  if (password !== confirmPassword) {
+    toast.error("password donot match")
+    return false
+  }
+  if (password.length < 6) {
+    toast.error("Password mustnot be less than 6 characters")
+    return false
+  }
+
+  return true;
+}
