@@ -2,7 +2,6 @@ import { useState } from "react"
 import {useAuthContext} from "../context/AuthContext.jsx"
 import toast from "react-hot-toast";
 
-
 const useLogin = () => {
     const [loading, setLoading] = useState(false)
     const {setAuthUser} = useAuthContext()
@@ -24,12 +23,11 @@ const useLogin = () => {
             localStorage.setItem("chat-user", JSON.stringify(data))
             setAuthUser(data)
         } catch (error) {
-            toast.error(error.message)
+            toast.error("Invalid credentials!!")
         } finally {
             setLoading(false)
         }
     }
-
     return {loading, login}
 }
 
