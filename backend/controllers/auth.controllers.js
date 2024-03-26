@@ -41,8 +41,8 @@ const signup = asyncHandler(async (req, res) => {
 })
 
 const login = asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email })
+    const { userName, password } = req.body;
+    const user = await User.findOne({ userName })
     if (!user) {
         throw new ApiError(404, "user doesnot exits")
     }

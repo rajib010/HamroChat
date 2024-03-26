@@ -1,6 +1,5 @@
 import { useState } from "react"
 import {useAuthContext} from "../context/AuthContext.jsx"
-import { json } from "react-router-dom"
 import toast from "react-hot-toast";
 
 
@@ -23,7 +22,7 @@ const useLogin = () => {
                 body: JSON.stringify({ userName, password })
             })
             const data = res.json();
-            if(data.error) throw new Error(data.error);
+            if(data.error) throw new Error(data.error) ;
             localStorage.setItem("chat-user", JSON.stringify(data))
             setAuthUser(data)
         } catch (error) {
