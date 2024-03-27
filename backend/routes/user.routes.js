@@ -4,7 +4,7 @@ import { getUsersForSideBar } from "../controllers/user.controllers.js";
 
 const userRouter = new Router();
 
-userRouter.get("/",verifyUser ,getUsersForSideBar);
+userRouter.get("/", verifyUser, getUsersForSideBar);
 
 
 export default userRouter
