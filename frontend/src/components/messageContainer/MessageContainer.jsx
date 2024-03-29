@@ -11,7 +11,7 @@ function MessageContainer() {
 
         //cleanup function
         return ()=>setSelectedConversation(null)
-    },[setSelectedConversationselectedConversation])
+    },[setSelectedConversation])
     return (
         <div className='md:min-w-[450px] flex flex-col'>
             {!selectedConversation ? (<NoChatSelected />) : (
