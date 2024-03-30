@@ -11,6 +11,11 @@ const io = new Server(server, {
     }
 });
 
+
+export const getRecieverSocketId = async (receiverId) => {
+    return userSocketMap[receiverId]
+}
+
 const userSocketMap = {};  //{userId:socketId}
 
 
