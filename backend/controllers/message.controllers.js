@@ -31,6 +31,7 @@ const sendMessage = asyncHandler(async (req, res) => {
 
     const receiverSocketId = getRecieverSocketId(receiverId)
     if (receiverSocketId) {
+        //to specific clients only
         io.to(receiverSocketId).emit("newMessage", newMessage)
     }
 
