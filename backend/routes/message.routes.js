@@ -5,7 +5,7 @@ import verifyUser from "../middlewares/verifyUser.js"
 const messageRouter = new Router()
 
 messageRouter.post("/send/:id", verifyUser, sendMessage)
-messageRouter.get("/:id", getMessages)
+messageRouter.get("/:id", verifyUser, getMessages)
 
 
 export default messageRouter

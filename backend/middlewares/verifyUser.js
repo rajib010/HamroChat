@@ -16,7 +16,7 @@ const verifyUser = asyncHandler(async (req, res, next) => {
         throw new ApiError(404, "User not found")
     }
     req.user = user
-    next()
+    next();
 })
 
 
