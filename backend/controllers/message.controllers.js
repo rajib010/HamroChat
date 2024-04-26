@@ -9,7 +9,7 @@ const sendMessage = asyncHandler(async (req, res) => {
     const { message } = req.body;
     const { id: receiverId } = req.params;
     const senderId = req.user?._id
-	// console.log(senderId,"senderID");
+    // console.log(senderId,"senderID");
     let conversation = await Conversation.findOne({
         participants: { $all: [senderId, receiverId] }
     })
@@ -42,35 +42,21 @@ const sendMessage = asyncHandler(async (req, res) => {
 const getMessages = asyncHandler(async (req, res) => {
     try {
         const { id: userToChatId } = req.params;
-		console.log("receiver id", userToChatId);
         const senderId = req.user?._id;
-		// we are unable to get the senderId
-		console.log("senderId",senderId.toString());
-        const conversation = await Conversation.aggregate([
-            {
-                $match: {
-                    participants: { $all: [senderId.toString(), userToChatId] }
-                }
-            },
-            {
-                $lookup: {
-                    from: "messages",
-                    localField: "messages",
-                    foreignField: "_id",
-                    as: "message_content"
-                }
-            },
-            {
-                $unwind: "$message_content"
-            }
-        ])
+        // console.log(senderId);  
+        // console.log("hello");
+        // console.log("senderId",senderId.toString());
 
-        console.log(conversation);
 
-        const messages = conversation.messages;
-        console.log(messages);
+        const conversation = await Conversation.findOne({
+            participants: { $all: [senderId.toString(), userToChatId] },
+        }).populate("messages");
+
         if (!conversation) return res.status(200).json([]);
-        return res.status(200).json(messages)
+        // console.log(conversation);
+
+        const messages = conversation.messages
+            return res.status(200).json(messages)
 
     } catch (error) {
         console.log("Error in message controller", error.message);
