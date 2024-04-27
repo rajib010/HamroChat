@@ -43,10 +43,6 @@ const getMessages = asyncHandler(async (req, res) => {
     try {
         const { id: userToChatId } = req.params;
         const senderId = req.user?._id;
-        // console.log(senderId);  
-        // console.log("hello");
-        // console.log("senderId",senderId.toString());
-
 
         const conversation = await Conversation.findOne({
             participants: { $all: [senderId.toString(), userToChatId] },
@@ -56,12 +52,28 @@ const getMessages = asyncHandler(async (req, res) => {
         // console.log(conversation);
 
         const messages = conversation.messages
-            return res.status(200).json(messages)
+        return res.status(200).json(messages)
 
     } catch (error) {
         console.log("Error in message controller", error.message);
-        res.status(500).json({ message: "Internal server error" });
+        return res.status(500).json({ message: "Internal server error" });
     }
 });
 
-export { sendMessage, getMessages }
+const deleteMessages = asyncHandler(async (req, res) => {
+    try {
+        const { id: userToChatId } = req.params;
+        const senderId = req.user?._id;
+
+        const result = await Conversation.findOneAndDelete({
+            participants: { $all: [senderId.toString(), userToChatId] }
+        });
+        if (!result) throw new ApiError(500, "Cannot delete the conversation");
+        return res.status(200).json(new ApiResponse(200, {}, "Conversation deleted successfully"))
+    } catch (error) {
+        console.log("Error in deleting conversation", error);
+        return res.status(500).json({ message: "Internal sever error" })
+    }
+})
+
+export { sendMessage, getMessages, deleteMessages }
