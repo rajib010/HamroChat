@@ -19,6 +19,7 @@ function Messages() {
     <div className='px-4 flex-1 overflow-auto'>
       {!loading &&
         messages &&
+        messages.length > 0 &&
         messages.map((message, index) => (
           <div key={index} ref={index === messages.length - 1 ? lastMessageRef : null}>
             <Message message={message} />
@@ -28,7 +29,11 @@ function Messages() {
       {loading && [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
 
       {!loading && !messages && (
-        <p className="text-center">Send a message to start the conversation.</p>
+        <p className="text-center">Start a conversation.</p>
+      )}
+
+      {!loading && messages && messages.length === 0 && (
+        <p className="text-center">Start a conversation.</p>
       )}
     </div>
   )

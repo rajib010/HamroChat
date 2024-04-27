@@ -3,18 +3,19 @@ import { useAuthContext } from "../../context/AuthContext.jsx"
 import useConversation from '../../zustand/useConversation.js'
 import { extractTime } from '../../utils/extractTime.js'
 
-
 function Message({ message }) {
     const { authUser } = useAuthContext()
-    const { selectedConversation } = useConversation()
-    const fromMe = message.senderId === authUser._id;
+    const { selectedConversation } = useConversation();
+    const fromMe = message.senderId === authUser.data._id;
+    // console.log(senderId);
     const chatClassName = fromMe ? 'chat-end' : 'chat-start';
     const formattedTime = extractTime(message.createdAt)
-    const profilePic = fromMe ? authUser.profilePic : selectedConversation.profilePic;
-    const bubbleBgColor = fromMe ? 'bg-blue-500' : "";
+    const profilePic = fromMe ? authUser.data.profilePic : selectedConversation.profilePic;
+    const bubbleBgColor = fromMe ? 'bg-blue-500' : "bg-gray-600";
+    const bubbleAlign = fromMe ? 'justify-end' : 'justify-start'; // Adjust bubble alignment
     const shakeClass = message.shouldShake ? "shake" : "";
     return (
-        <div className={`chat ${chatClassName}`}>
+        <div className={`chat ${chatClassName} flex ${bubbleAlign}`}>
             <div className='chat-image avatar'>
                 <div className="w-10 rounded-full">
                     <img alt="Tailwind CSS chat bubble component" src={profilePic} />
