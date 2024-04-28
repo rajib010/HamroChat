@@ -30,6 +30,6 @@ const useGetConversations = () => {
 		getConversations();
 	}, []);
 
-	return { loading, conversations };
+	return { loading, conversations, setConversations };
 };
 export default useGetConversations;
