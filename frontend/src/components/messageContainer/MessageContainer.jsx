@@ -37,9 +37,9 @@ function MessageContainer() {
                     {/* Header */}
                     <div className="bg-slate-700 px-4 py-2 mb-2 flex flex-row items-center">
                         <span className='label-text font-semibold'>To:</span>
-                        <span className='text-gray-900 font-bold ml-2'>{selectedConversation.fullName}</span>
+                        <span className='text-white font-bold ml-2'>{selectedConversation.fullName}</span>
                         <span className='ml-auto'>
-                            <AiTwotoneDelete className='text-3xl hover:' onClick={handleDeleteConversation} />
+                            <AiTwotoneDelete className='text-2xl hover:text-3xl' onClick={handleDeleteConversation} />
                         </span>
                     </div>
 

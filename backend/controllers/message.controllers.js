@@ -68,12 +68,17 @@ const deleteMessages = asyncHandler(async (req, res) => {
         const result = await Conversation.findOneAndDelete({
             participants: { $all: [senderId.toString(), userToChatId] }
         });
-        if (!result) throw new ApiError(500, "Cannot delete the conversation");
-        return res.status(200).json({message:"Conversation deleted successfully"});
+
+        if (!result) {
+            return res.status(500).json({ message: "Cannot delete empty conversation" });
+        }
+
+        return res.status(200).json({ message: "Conversation deleted successfully" });
     } catch (error) {
         console.log("Error in deleting conversation", error);
-        return res.status(500).json({ message: "Internal sever error" })
+        return res.status(500).json({ message: "Internal server error" });
     }
-})
+});
+
 
 export { sendMessage, getMessages, deleteMessages }
