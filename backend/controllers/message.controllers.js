@@ -38,7 +38,7 @@ const sendMessage = asyncHandler(async (req, res) => {
             io.to(receiverSocketId).emit("newMessage", newMessage)
         }
 
-        return res.status(200).json(new ApiResponse(200, newMessage, "message sent successfully"))
+        return res.status(200).json(newMessage)
     } catch (e) {
         console.log("Error in sendMesage controller", error.message);
         res.status(500).json({ error: "internal server error" })
