@@ -23,10 +23,6 @@ app.use(express.static("public"))
 app.use(cookieParser())
 
 
-// app.get("/", (req, res) => {
-//     res.send("hello world")
-// })
-
 // import the routers
 
 import authRouter from "./routes/auth.routes.js"
