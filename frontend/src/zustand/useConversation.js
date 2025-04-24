@@ -8,7 +8,8 @@ const useConversation = create((set, get) => {
         }
     })
 
-    socket.on("recieveMessage", data => {
+    socket.on("receiveMessage", data => {
+        console.log("Received message:", message);
         set((state) => ({
             messages: [...state.messages, data]
         }))

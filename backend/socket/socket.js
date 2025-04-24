@@ -32,7 +32,7 @@ io.on("connection", (socket) => {
         const receiverSocketId = await getRecieverSocketId(receiverId);
 
         if (receiverSocketId) {
-            io.to(receiverSocketId).emit("recieveMessage", {
+            io.to(receiverSocketId).emit("receiveMessage", {
                 senderId,
                 message,
                 timestamp: new Date().toISOString(),
